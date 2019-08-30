@@ -1,0 +1,71 @@
+Nama
+    Myshell 
+
+Deskripsi
+    Myshell adalah sebuah shell sederhana yang mengeksekusi command dari inputan atau file.
+
+	a. Memulai Shell
+		Myshell dapat dimulai dengan menjalankan makefile terlebih dahulu, kemudian mengeksekusi make :
+			$ ./makefile
+			$./make
+
+		Tampilan dari Myshell itu sendiri adalah sebagai berikut :
+
+			myshell (/path/to/current/working/directory)$ 
+
+	b. Script File Support
+
+		Myshell dapat mengeksekusi command line yang berada dalam sebuah file. Misalnya file bernama "Batchfile" yang terdapat di cwd (current working directory), commandnya adalah :
+			$ chmod +x Batchfile
+			$./Batchfile
+
+	c. Eksternal Command
+
+		Seluruh command yang tidak termasuk dalam internal command akan dijalankan sebagai program invocation dan sebagai child process.
+	
+	d. Internal Commands
+
+		Internal command yang berjalan di dalam Myshell adalah
+
+		cd <directory>      Pindah directory saat ini ke <directory>.
+		clr		  Membersihkan layar.
+		dir <directory>      Menampilkan daftar konten yang ada di dalam <directory>.
+		environ             Menampilkan semua isi variabel environment.
+		echo <argument>     Menampilkan <argument>.
+		help               Menampilkan user manual(tekan q untuk keluar dari help).
+		pause              Melakukan pause pada operasi shell hingga enter ditekan.
+		exit               Keluar dari shell.
+
+	e. Eksekusi Background Proses
+
+		External program dapat dieksekusi di background dengan menambahkan ampersand token '&' di akhir input command dipisahkan dengan paling tidak satu spasi:
+
+			$ programname arg1 arg2 ... &
+
+		mengalihkan proses ke background sangat berguna untuk external program, karena myshell bisa melanjutkan eksekusi user input lain tanpa harus menunggu external proses selesai.
+
+	f. I/O Redirection
+
+		Myshell memperbolehkan penggunaan input terhadap shell dari file batch daripada input standar, yang disebut dengan input redirection.
+
+			$ programname arg1 arg2 ... < inputfile
+
+		Hal serupa juga berlaku pada output, yang bisa langsung dialihkan ke file output daripada output standar, yang disebut output redirection. Perlu dicatat bahwa isi dari file output yang lama akan tertimpa oleh output dari program.
+
+			$ programname arg1 arg2 ... > outputfile
+
+		Myshell juga mendukung variasi lain dari output redirection. Tanda '>>' menunjukkan bahwa output dari program ditambahkan ke dalam file output. Sintaksnya adalah sebagai berikut:
+
+			$ programname arg1 arg2 ... >> outputfile
+
+		I/O redirection juga bisa dikombinasikan dalam satu statement. Kedua sintaks berikut adalah valid:
+
+			$ programname arg1 arg2 ... < inputfile > outputfile
+			$ programname arg1 arg2 ... < inputfile >> outputfile
+	 g. Variabel Environment
+
+		Variabel Environment adalah satu set dynamic values yang mempengaruhi jalannya proses di dalam system. Variabel Environment memiliki beberapa kegunaan antara lain:
+		- Variabel Environment dapat diakses oleh program yang sedang running untuk kepentingan konfigurasi.
+		- Temporary values dapat disimpan ke dalam variabel environment untuk keperluan yang akan datang.
+
+		Myshell memiliki tiga variabel environment tambahan di samping variabel environment yang dimiliki sistem, yaitu shell, parent, dan readme. Perintah 'environ' menampilkan daftar variabel environtmen dalam sistem. Variabel environment 'readme' berisi path menuju file 'readme', dan berguna untuk menampilkan halaman manual untuk Myshell dari working directory manapun.
